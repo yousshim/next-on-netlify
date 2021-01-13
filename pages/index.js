@@ -1,10 +1,23 @@
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { useState } from "react";
 
-export default function Home() {
+export default function Home({ name: nameProp }) {
+  const [name, setName] = useState(nameProp)
   return (
     <h1 className={styles.container}>
-      hello world
+      hello { name}
+      <button onClick={e => setName("world")}>name to world</button>
     </h1>
   )
+}
+
+
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:3000/api/hello")
+  const { name } = await res.json();
+  return {
+    props: {
+      name
+    }
+  }
 }
