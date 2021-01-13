@@ -13,7 +13,7 @@ export default function Home({ name: nameProp }) {
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/hello")
+  const res = await fetch("http://next-on-netlify.vercel.app/api/hello")
   const { name } = await res.json();
   return {
     props: {
